@@ -10,8 +10,8 @@
       what_the_user_has_typed = "";
       if(!numbers_left_for_the_second_multiplicator.length)
       {
-        maximum_number_for_a_random_number_generator += 1;
-        minimum_number_for_a_random_number_generator += 1;
+        maximum_number_for_a_random_number_generator += 5;
+        minimum_number_for_a_random_number_generator += 5;
         numbers_left_for_the_first_multiplicator = Array.from({length:maximum_number_for_a_random_number_generator}, (_,i)=>i);
         numbers_left_for_the_second_multiplicator = Array.from({length:maximum_number_for_a_random_number_generator-minimum_number_for_a_random_number_generator}, (_,i)=>i+minimum_number_for_a_random_number_generator);
       }
@@ -50,8 +50,8 @@
 			second_multiplicator%10,
 		];
 		let vtr = `<br>${decimals[0]} * ${decimals[1]} = ${decimals[0] * decimals[1]}`;
+		vtr += `<br>${remainders[0]} * ${decimals[1]} = ${remainders[0] * decimals[1]}`;		
 		vtr += `<br>${decimals[0]} * ${remainders[1]} = ${decimals[0] * remainders[1]}`;
-		vtr += `<br>${remainders[0]} * ${decimals[1]} = ${remainders[0] * decimals[1]}`;
 		vtr += `<br>${remainders[0]} * ${remainders[1]} = ${remainders[0] * remainders[1]}`;
 		
 		
