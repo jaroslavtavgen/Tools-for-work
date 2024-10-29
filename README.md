@@ -1,0 +1,3 @@
+Math Square Trainer with a Time Limit.html helps you to train your skills of finding a square of a number. The numbers are generated randomly, the difficulty level increases after you've guessed all squares from the current range. You have 5 seconds to correctly guess the answer. Incorrect guesses are forgiven.
+
+Math Multiplication Trainer with a Time Limit.html helps you to train your multiplication skills. The numbers are generated randomly, the difficulty level increases after you've guessed all possible multiplications from the current range. You have 5 seconds to correctly guess the answer. Incorrect guesses are forgiven.
