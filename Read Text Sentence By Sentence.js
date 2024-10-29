@@ -13,6 +13,7 @@ tags(`button`)[0].addEventListener(`click`, a1);
 let index = 0;
 let sentences = [];
 let words = [];
+tags(`textarea`)[0].focus();
 function a1(event)
 {
   sentences = tags(`textarea`)[0].value.split(`\n`);
