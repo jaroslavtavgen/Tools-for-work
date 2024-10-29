@@ -1,62 +1,87 @@
-
-<body>
-    
+<body>   
     <script>
     document.body.style.fontSize = `3em`;
-    let min = 0;
-    let max = 15;
-    let input, one, power, reference;
-    let lost = false;
-    let unasked_numbers_one = Array.from({length:max},(_,i)=>i);
-    let unasked_numbers_two = Array.from({length:max},(_,i)=>i);
+    let minimum_number_for_a_random_number_generator = 0;
+    let maximum_number_for_a_random_number_generator = 15;
+    let what_the_user_has_typed, first_multiplicator, answer, time_to_compare_with;
+    let numbers_left_for_the_first_multiplicator = Array.from({length:maximum_number_for_a_random_number_generator},(_,i)=>i);
+    let numbers_left_for_the_second_multiplicator = Array.from({length:maximum_number_for_a_random_number_generator},(_,i)=>i);
     function regenerate(){
-      input = "";
-      if(!unasked_numbers_two.length)
+      what_the_user_has_typed = "";
+      if(!numbers_left_for_the_second_multiplicator.length)
       {
-        max += 1;
-        min += 1;
-        unasked_numbers_one = Array.from({length:max}, (_,i)=>i);
-        unasked_numbers_two = Array.from({length:max-min}, (_,i)=>i+min);
+        maximum_number_for_a_random_number_generator += 1;
+        minimum_number_for_a_random_number_generator += 1;
+        numbers_left_for_the_first_multiplicator = Array.from({length:maximum_number_for_a_random_number_generator}, (_,i)=>i);
+        numbers_left_for_the_second_multiplicator = Array.from({length:maximum_number_for_a_random_number_generator-minimum_number_for_a_random_number_generator}, (_,i)=>i+minimum_number_for_a_random_number_generator);
       }
-      one = unasked_numbers_one.splice(Math.floor(Math.random()*unasked_numbers_one.length),1)[0];
-      two = unasked_numbers_two.splice(Math.floor(Math.random()*unasked_numbers_two.length),1)[0];
-      power = one * two;
-      document.getElementsByTagName`span`[0].innerHTML = `${one} x ${two} = `;
+      first_multiplicator = numbers_left_for_the_first_multiplicator.splice(Math.floor(Math.random()*numbers_left_for_the_first_multiplicator.length),1)[0];
+      second_multiplicator = numbers_left_for_the_second_multiplicator.splice(Math.floor(Math.random()*numbers_left_for_the_second_multiplicator.length),1)[0];
+      answer = first_multiplicator * second_multiplicator;
+      document.getElementsByTagName`span`[0].innerHTML = `${first_multiplicator} x ${second_multiplicator} = `;
       document.getElementsByTagName`span`[1].innerHTML = ``;
-      reference = performance.now();
+      time_to_compare_with = performance.now();
     }
     document.body.appendChild(document.createElement(`div`));
+	document.body.appendChild(document.createElement(`div`));
     document.getElementsByTagName`div`[0].appendChild(document.createElement(`span`));
     document.getElementsByTagName`div`[0].appendChild(document.createElement(`span`));
     document.getElementsByTagName`div`[0].appendChild(document.createElement(`span`));
     document.getElementsByTagName`span`[2].appendChild(document.createElement(`button`));
+	document.getElementsByTagName`span`[2].appendChild(document.createElement(`button`));
     document.getElementsByTagName`button`[0].style.display = `none`;
     document.getElementsByTagName`button`[0].style.fontSize = `1em`;
     document.getElementsByTagName`button`[0].style.marginTop = `20px`;
     document.getElementsByTagName`button`[0].innerHTML = "Try Again!"
+    document.getElementsByTagName`button`[1].style.display = `none`;
+    document.getElementsByTagName`button`[1].style.fontSize = `1em`;
+    document.getElementsByTagName`button`[1].style.marginTop = `20px`;
+    document.getElementsByTagName`button`[1].innerHTML = "Common Core Breakdown"
     document.getElementsByTagName`button`[0].addEventListener(`click`, a3);
+	document.getElementsByTagName`button`[1].addEventListener(`click`, a4);
     function a3(){ window.location.reload () };
+	function a4(){
+		let decimals = [
+			Math.floor(first_multiplicator/10) * 10,
+			Math.floor(second_multiplicator/10) * 10
+		]
+		let remainders = [
+			first_multiplicator%10,
+			second_multiplicator%10,
+		];
+		let vtr = `<br>${decimals[0]} * ${decimals[1]} = ${decimals[0] * decimals[1]}`;
+		vtr += `<br>${decimals[0]} * ${remainders[1]} = ${decimals[0] * remainders[1]}`;
+		vtr += `<br>${remainders[0]} * ${decimals[1]} = ${remainders[0] * decimals[1]}`;
+		vtr += `<br>${remainders[0]} * ${remainders[1]} = ${remainders[0] * remainders[1]}`;
+		
+		
+		document.getElementsByTagName`div`[1].innerHTML = vtr;	
+	}
     regenerate();
     document.addEventListener(`keypress`, a1);
     setInterval(a2,250);
     function a2()
     {
-      if((performance.now()-reference)>5000)
+      if((performance.now()-time_to_compare_with)>5000)
       {
         document.removeEventListener(`keypress`, a1);
-        document.getElementsByTagName`span`[1].innerHTML =power;
-        document.getElementsByTagName`button`[0].style.display = `block`;    
+        document.getElementsByTagName`span`[1].innerHTML =answer;
+        document.getElementsByTagName`button`[0].style.display = `block`;
+		if(first_multiplicator < 100 && second_multiplicator < 100)
+		{
+			document.getElementsByTagName`button`[1].style.display = `block`;
+		}
       }
     }
     function a1(event)
     {
       let key = event.key.toLowerCase();
-      if(power.toString().startsWith(input+key))
+      if(answer.toString().startsWith(what_the_user_has_typed+key))
       {
-        input += key;
+        what_the_user_has_typed += key;
       }
-      document.getElementsByTagName`span`[1].innerHTML = input;
-      if (power.toString() == input)
+      document.getElementsByTagName`span`[1].innerHTML = what_the_user_has_typed;
+      if (answer.toString() == what_the_user_has_typed)
       {
         regenerate();
       }
