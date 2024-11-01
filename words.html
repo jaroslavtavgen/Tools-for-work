@@ -25,13 +25,13 @@ function predict(input, number_of_parallel_universes)
 let number_of_neurons = 25;
 let denominator = quotes[0];
 let number_of_parallel_universes = 1;
-let weights = [];
 let we = 0.1;
 
 let best_actual_difference = Infinity;
 let times2 = 0;
 while(true)
 {
+  let weights = [];
   for(let universe=0;universe<number_of_parallel_universes;universe++)
   {
     for(let neuron=0;neuron<number_of_neurons;neuron++)
@@ -45,7 +45,7 @@ while(true)
   }
   let best_difference = Infinity;
   let best_weights = [];
-  for(let times=0;times<20000;times++)
+  for(let times=0;times<1000000;times++)
   {
     if(times>0)
     {
