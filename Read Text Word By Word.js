@@ -20,6 +20,7 @@ function a1(event)
   tags(`textarea`)[0].value = ``;
   tags(`button`)[0].removeEventListener(`keyup`, a2);
   document.addEventListener(`keyup`, a2);
+  index = 0;
 }
 function a2(event)
 {
